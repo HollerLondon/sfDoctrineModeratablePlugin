@@ -1,0 +1,7 @@
+div#global-moderation-controls {
+}
+
+div#global-moderation-controls label {
+  float:none;
+  display:inline;
+}

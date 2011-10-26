@@ -1,0 +1,10 @@
+all:
+  moderation:
+    audit:               false
+    notify:
+      #from: 
+      #  name:           put these
+      #  email:          into your app's app.yml
+      subject:          "An item has been reported"
+      # this can be a single email string, or an array of multiple emails:
+      emails:         

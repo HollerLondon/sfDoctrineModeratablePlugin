@@ -1,0 +1,35 @@
+ReportLog:
+  options:
+    symfony:
+      filter:             false
+  actAs:
+    Timestampable:        ~
+  columns:
+    reported_object:      varchar(100)
+    reported_object_id:   int
+    reporter:             varchar(50)
+    email:                varchar(70)
+    reason:               { type: enum, values: [ copyright, offensive, other ] }
+    message:              string
+  indexes:
+    reported_object_idx:
+      fields:             [ reported_object, reported_object_id ]
+      
+# this is for recording who changed what and when
+ModerationLog:
+  options:
+    symfony:
+      form:          false
+      filter:        false
+  options:
+    symfony:
+      form:          false
+      filter:        false
+  actAs:
+    Timestampable:   ~
+  columns:
+    object_type:     { type: string, notnull: true }
+    object_id:       { type: integer, notnull: true }
+    old_status:      { type: string, notnull: true }
+    new_status:      { type: string, notnull: true }
+    updated_by:      { type: integer, notnull: true }
