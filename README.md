@@ -12,6 +12,20 @@ Usage
             flag_profane:           true
             default_flag:           'safe'
 
+
+And enable the preDQL in the application configuration (usually frontend):
+
+    class [APPLICATION]Configuration extends sfApplicationConfiguration
+    {
+       ....
+
+       public function configureDoctrine(Doctrine_Manager $manager)
+       {
+         $manager->setAttribute(Doctrine_Core::ATTR_USE_DQL_CALLBACKS, true);
+       }
+    }
+
+
 Options
 -------
 
