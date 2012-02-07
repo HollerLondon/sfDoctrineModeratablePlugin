@@ -1,5 +1,6 @@
 all:
   moderation:
+    javascript:          JQuery   # JQuery or MooTools version
     audit:               false
     notify:
       #from: 
