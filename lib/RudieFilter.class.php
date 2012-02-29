@@ -103,9 +103,31 @@ class RudieFilter
     {
         if(!self::$profanities)
         {
-            include('profanities.php');
-            self::$profanities = $rwords;
+            include 'profanities.php';
             
+            // Combine stock profanities with app-specific ones
+            $extras = sfConfig::get('app_moderatable_plugin_extra_profanities',array());
+            
+            foreach($extras as $file)
+            {
+              if(file_exists($file) && is_readable($file))
+              {
+                include $file;
+
+                if(!isset($extra_words) || !is_array($extra_words))
+                {
+                  throw new sfException(sprintf("Tried to include profanities from %s but there were none",$file));
+                }
+                
+                foreach($extra_words as $word)
+                {
+                  $rwords[] = preg_quote($word);
+                }
+                unset($extra_words);
+              }
+            }
+            
+            self::$profanities = $rwords;
             unset($rwords);
         }
         
