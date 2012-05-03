@@ -6,12 +6,12 @@ Usage
 
      actAs:
         Moderatable:
-            fields:                 [title, sub_title, description]
+            fields:                 [title, description]
             strip:                  false
-            replace:                true
-            flag_profane:           true
-            default_flag:           'safe'
-
+            replace:                false
+            default_flag:           'unmoderated'
+            post_mod:               false
+            
 
 And enable the preDQL in the application configuration (usually frontend):
 
@@ -24,6 +24,12 @@ And enable the preDQL in the application configuration (usually frontend):
          $manager->setAttribute(Doctrine_Core::ATTR_USE_DQL_CALLBACKS, true);
        }
     }
+    
+
+If you want the field to be an enum (if you're using MySQL etc), then set the following in your databases.yml
+
+      attributes:
+        use_native_enum: true
 
 
 Options
@@ -31,11 +37,19 @@ Options
 
  * `fields` - YAML array of fields to check
  * `strip` - If true then remove all profane strings.
- * `replace` - Replace profane strings with given value. if strip: true then this has no effect.[[BR]]~ means use default replacement string ('*****')
- * `flag_profane` - true or false. If a field is profane and this is set to true its status will be set to 'flagged'
- * `default_flag` - Default moderation state.
+ * `replace` - Replace profane strings with '*****'. If `strip: true` then this has no effect. 
+ * `profane_flag` - Default status for items flagged as profane, can have the values 'flagged' or 'rejected' - default is 'rejected'
+ * `default_flag` - Default moderation state. It can have the values 'unmoderated', 'safe' or 'followup' - default is 'unmoderated'
+  * unmoderated - not yet been moderated
+  * safe - no problems here
+  * followup - needs investigation
+  * flagged - reported by user or profanities detected (if profamne_flag set to `flagged`)
+  * rejected - rejected by moderator or profanities detected (if profamne_flag set to `rejected`)
+ * `post_mod` - true or false
+  * Pre-moderated - means it's displayed only if someone moderates it first in the backend.
+  * Post-moderated - means it's displayed once it's added by the user. It can be taken off the website by moderator on the backend app. It also can be flagged in the frontend app by anyone - in this case (usually) it's awaiting moderation, while still visible, but only for 1h (flagged_threshold). If no one moderates the flagged request within this time, the item usually is taken off the website.
+ * `flagged_threshold` - number of seconds after which a reported (but as yet, unmoderated) item should be ommitted from results sets - default 1h.
 
-`flag` and `default_flag` options can have values: `moderate`, `safe`, `removed`.
 
 Adding more profanities to check for
 -------------------------------------
