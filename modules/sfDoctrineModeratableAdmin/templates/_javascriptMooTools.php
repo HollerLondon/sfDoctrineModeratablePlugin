@@ -4,35 +4,19 @@
 // for recording whether anything has been moderated or not
 // on the view comments listing.
 var MODERATION_CHANGE = false;
-
-var MODERATION_COLOURS = {
-  'unmoderated' : {
-    'background-color' : '#CCC',
-    'color' : '#000'
-  },
-  'safe' : {
-    'background-color' : '#CCFFB2',
-    'color' : '#000'
-  },
-  'flagged' : {
-    'background-color' : '#FF8566',
-    'color' : '#000'
-  },
-  'followup' : {
-    'background-color' : '#fff',
-    'color' : '#000'
-  },
-  'rejected' : {
-    'background-color' : '#000',
-    'color' : '#fff'
-  },
-};
+var MODERATION_STATES = [ 'unmoderated', 'safe', 'followup', 'rejected', 'flagged' ];
 
 var colourRows = function()
 {
   // comment status coloring
   $$("input[type=radio][name!=global]:checked").each(function(el) {
-    el.getParent("tr").setStyles(MODERATION_COLOURS[el.get('value')]);
+    var parentTr          = el.getParent("tr");
+    var currentClasses    = parentTr.get('class').split(' '); 
+    var potentialModClass = currentClasses.pop();
+    
+    if (-1 != MODERATION_STATES.indexOf(potentialModClass)) parentTr.removeClass(potentialModClass);
+    
+    parentTr.addClass(el.get('value'));
   });
 };
 

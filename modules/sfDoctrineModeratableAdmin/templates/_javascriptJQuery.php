@@ -8,10 +8,10 @@
   function colourRows()
   {
     // comment status coloring
-    $(":radio[value='unmoderated']:checked").closest("tr").css('backgroundColor', '#CCC').css('color', '#000');
+    $(":radio[value='unmoderated']:checked").closest("tr").css('backgroundColor', '#fff').css('color', '#000');
     $(":radio[value='safe']:checked").closest("tr").css('backgroundColor', '#CCFFB2').css('color', '#000');
     $(":radio[value='flagged']:checked").closest("tr").css('backgroundColor', '#FF8566').css('color', '#000');
-    $(":radio[value='followup']:checked").closest("tr").css('backgroundColor', '#fff').css('color', '#000');
+    $(":radio[value='followup']:checked").closest("tr").css('backgroundColor', '#ccc').css('color', '#000');
     $(":radio[value='rejected']:checked").closest("tr").css('backgroundColor', '#000').css('color','#fff');
   }
 

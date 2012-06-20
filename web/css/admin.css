@@ -5,3 +5,28 @@ div#global-moderation-controls label {
   float:none;
   display:inline;
 }
+
+#sf_admin_container tr.unmoderated {
+  background-color: #fff;
+  color: #000;
+}
+#sf_admin_container tr.safe {
+  background-color: #CCFFB2;
+  color: #000;
+}
+#sf_admin_container tr.flagged {
+  background-color: #FF8566;
+  color: #000;
+}
+#sf_admin_container tr.followup {
+  background-color: #ccc;
+  color: #000;
+}
+#sf_admin_container tr.rejected {
+  background-color: #000;
+  color: #fff;
+}
+
+#sf_admin_container tr.rejected label, #sf_admin_container tr.rejected a {
+  color: #fff;
+}
