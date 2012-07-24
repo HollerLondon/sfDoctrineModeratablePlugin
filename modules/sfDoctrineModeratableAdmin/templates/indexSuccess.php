@@ -10,7 +10,7 @@
   <?php include_partial($sf_params->get('module') . '/flashes'); ?>
 
   <div id="sf_admin_bar">
-    <?php include_partial('competition_entry/filters', array('form' => $filters, 'configuration' => $configuration)) ?>
+    <?php include_partial($sf_params->get('module') . '/filters', array('form' => $filters, 'configuration' => $configuration)) ?>
   </div>
 
   <div id="sf_admin_content">
@@ -38,7 +38,7 @@
     <?php endif; ?>   
     
     <ul class="sf_admin_actions">
-      <?php include_partial('competition_entry/list_actions', array('helper' => $helper)) ?>
+      <?php include_partial($sf_params->get('module') . '/list_actions', array('helper' => $helper)) ?>
     </ul> 
   </div>
 </div>
