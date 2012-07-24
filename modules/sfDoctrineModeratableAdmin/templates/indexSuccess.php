@@ -9,6 +9,10 @@
 
   <?php include_partial($sf_params->get('module') . '/flashes'); ?>
 
+  <div id="sf_admin_bar">
+    <?php include_partial('competition_entry/filters', array('form' => $filters, 'configuration' => $configuration)) ?>
+  </div>
+
   <div id="sf_admin_content">
     <?php include_partial($sf_params->get('module') . '/list_header', array('pager' => $pager)); ?>
     
@@ -31,6 +35,10 @@
       </form>
     
       <?php include_partial($sf_params->get('module') . '/list_footer', array('pager' => $pager)); ?>
-    <?php endif; ?>    
+    <?php endif; ?>   
+    
+    <ul class="sf_admin_actions">
+      <?php include_partial('competition_entry/list_actions', array('helper' => $helper)) ?>
+    </ul> 
   </div>
 </div>
