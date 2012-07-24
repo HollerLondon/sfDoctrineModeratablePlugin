@@ -1,6 +1,7 @@
 all:
   moderation:
     javascript:          JQuery   # JQuery or MooTools version
+    use_slots:           false
     audit:               false
     notify:
       #from: 
