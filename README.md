@@ -26,7 +26,18 @@ And enable the preDQL in the application configuration (usually frontend):
     }
     
 
-If you want the field to be an enum (if you're using MySQL etc), then set the following in your databases.yml
+If you want the field to be an enum (if you're using MySQL etc), then set the following in your global ProjectConfiguration:
+
+     public function configureDoctrine(Doctrine_Manager $manager)
+     {
+       $manager->setAttribute(Doctrine_Core::ATTR_USE_NATIVE_ENUM, true);
+       $manager->setAttribute(Doctrine_Core::ATTR_DEFAULT_TABLE_CHARSET, 'utf8');
+       $manager->setAttribute(Doctrine_Core::ATTR_DEFAULT_TABLE_COLLATE, 'utf8_general_ci');
+       $manager->setAttribute(Doctrine_Core::ATTR_QUERY_LIMIT, Doctrine_Core::LIMIT_ROWS);
+     }
+
+
+Or in your databases.yml:
 
       attributes:
         use_native_enum: true
