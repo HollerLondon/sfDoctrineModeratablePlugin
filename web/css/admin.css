@@ -30,3 +30,15 @@ div#global-moderation-controls label {
 #sf_admin_container tr.rejected label, #sf_admin_container tr.rejected a {
   color: #fff;
 }
+
+#sf_admin_container .sf_admin_list_td_moderation_status {
+  width: 115px;
+}
+
+#sf_admin_container .sf_admin_list_td_moderation_status ul {
+  margin: 0;
+}
+
+#sf_admin_container .sf_admin_list_td_moderation_status ul li {
+  list-style-type: none;
+}
