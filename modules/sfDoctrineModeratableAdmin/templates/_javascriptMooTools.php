@@ -6,8 +6,7 @@
 var MODERATION_CHANGE = false;
 var MODERATION_STATES = [ 'unmoderated', 'safe', 'followup', 'rejected', 'flagged' ];
 
-var colourRows = function()
-{
+var colourRows = function() {
   // comment status coloring
   $$("input[type=radio][name!=global]:checked").each(function(el) {
     var parentTr          = el.getParent("tr");
@@ -20,37 +19,35 @@ var colourRows = function()
   });
 };
 
-var confirmNoSave = function (event)
-{ 
+var confirmNoSave = function (event) { 
   if (MODERATION_CHANGE) return 'Your moderation changes will be lost.';
 };
 
-$(document).addEvent('domready', function()
-{
+$(document).addEvent('domready', function() {
   window.onbeforeunload = confirmNoSave; // doesn't work with addEvent in all browsers
-  
-  $('save-changes').addEvent('click', function()
-  {
-    window.onbeforeunload = null;
-  });
+
+  if ($('save-changes')) {
+    $('save-changes').addEvent('click', function() {
+      window.onbeforeunload = null;
+    });
+  }
   
   // change single comment status
-  $('moderation-list').getElements('input[type=radio][name!=global]').addEvent('click', function()
-  {
-    $$('input[name=global]').set('checked', false);
-    MODERATION_CHANGE = true;
-    colourRows();
-  });
+  if ($('moderation-list')) {
+    $('moderation-list').getElements('input[type=radio][name!=global]').addEvent('click', function() {
+      $$('input[name=global]').set('checked', false);
+      MODERATION_CHANGE = true;
+      colourRows();
+    });
+  }
   
   // global change, all comments on page
-  $$('input[name=global]').addEvent('click', function()
-  {
+  $$('input[name=global]').addEvent('click', function() {
     $$("input[type=radio][value='"+this.get('value')+"'][name!=global]").set('checked', true);
         
     colourRows();
   });
   
   colourRows();
-
 });
 </script>
